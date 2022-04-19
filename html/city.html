@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Taiwan Weather Website</title> 
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+        <!-- <link rel="stylesheet" type="css/text" href="base.css"> -->
+        <!-- <link rel="stylesheet" href="{{ url_for('css', filename='city.css')}}"> -->
+        <link rel="stylesheet" href="../css/city.css"/>
+        <!-- <link rel="stylesheet" type="css/text" href="/css/city.css"> -->
+    </head>
+    <body>
+        <div class="city-section">
+            <div class="city-section-left">
+                <div class="city-name">台北市</div>
+                <div class="city-weather">氣溫</div>
+            </div>
+            <div class="city-section-right">
+                <div class="city-section-right-frame">
+                    <div class="city-WindDir">風向</div>
+                    <div class="city-WindDir-info">風向內容</div>
+                </div>
+                <div class="city-section-right-frame">
+                    <div class="city-AP">氣壓</div>
+                    <div class="city-AP-info">氣壓內容</div>
+                </div>
+                <div class="city-section-right-frame">
+                    <div class="city-RH">濕度</div>
+                    <div class="city-RH-info">濕度內容</div>
+                </div>
+            </div>
+        </div>
+        <div class="city-back-to-indexPage">回首頁</div>
+        <script src="city.js"></script> 
+    </body>
+</html>
