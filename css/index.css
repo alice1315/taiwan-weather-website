@@ -59,10 +59,7 @@ header {
     color:#4c5870ff;
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 30px;
-    cursor: pointer;
-    
-    
-    
+    cursor: pointer; 
 }
 
 .index-select-area:hover {
