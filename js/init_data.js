@@ -139,26 +139,27 @@ function index_data(){
     }).then(function(temp_result){
         console.log(temp_result)
         // 給 index.js 用的變數
-        index_data_Keelung=temp_result["records"]["location"][18];
-        index_data_Taipei=temp_result["records"]["location"][5];
-        index_data_NewTaipeiCity=temp_result["records"]["location"][1];
-        index_data_Taoyuan=temp_result["records"]["location"][13];
-        index_data_Hsinchu=temp_result["records"]["location"][3];
-        index_data_Miaoli=temp_result["records"]["location"][8];
-        index_data_Taichung=temp_result["records"]["location"][11];
-        index_data_Changhua=temp_result["records"]["location"][20];
-        index_data_Nantou=temp_result["records"]["location"][14];
-        index_data_Yunlin=temp_result["records"]["location"][9];
-        index_data_Chiayi=temp_result["records"]["location"][0];
-        index_data_Tainan=temp_result["records"]["location"][6];
-        index_data_Kaoshiung=temp_result["records"]["location"][15];
-        index_data_Pingtung=temp_result["records"]["location"][17];
-        index_data_Taidong=temp_result["records"]["location"][12];
-        index_data_Huanlian=temp_result["records"]["location"][10];
-        index_data_Yilan=temp_result["records"]["location"][7];
-        index_data_Penghu=temp_result["records"]["location"][19];
-        index_data_Jinmen=temp_result["records"]["location"][16];
-        index_data_Matsu=temp_result["records"]["location"][21];
+        // index_data_Keelung=temp_result["records"]["location"][18];
+        // index_data_Taipei=temp_result["records"]["location"][5];
+        // index_data_NewTaipeiCity=temp_result["records"]["location"][1];
+        // index_data_Taoyuan=temp_result["records"]["location"][13];
+        // index_data_Hsinchu=temp_result["records"]["location"][3];
+        // index_data_Miaoli=temp_result["records"]["location"][8];
+        // index_data_Taichung=temp_result["records"]["location"][11];
+        // index_data_Changhua=temp_result["records"]["location"][20];
+        // index_data_Nantou=temp_result["records"]["location"][14];
+        // index_data_Yunlin=temp_result["records"]["location"][9];
+        // index_data_Chiayi=temp_result["records"]["location"][0];
+        // index_data_Tainan=temp_result["records"]["location"][6];
+        // index_data_Kaoshiung=temp_result["records"]["location"][15];
+        // index_data_Pingtung=temp_result["records"]["location"][17];
+        // index_data_Taidong=temp_result["records"]["location"][12];
+        // index_data_Huanlian=temp_result["records"]["location"][10];
+        // index_data_Yilan=temp_result["records"]["location"][7];
+        // index_data_Penghu=temp_result["records"]["location"][19];
+        // index_data_Jinmen=temp_result["records"]["location"][16];
+        // index_data_Matsu=temp_result["records"]["location"][21];
+        
         // 給 city.js 用的變數
         temp_weather_data = temp_result["records"]["location"]
     })
