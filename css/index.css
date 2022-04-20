@@ -48,7 +48,7 @@ header {
 
 .index-areas {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     width: 1100px;
     height: 80px;
@@ -56,18 +56,18 @@ header {
 }
 
 .index-select-area {
+    color:#4c5870ff;
     font-family: 'Noto Sans TC', sans-serif;
-    font-size: 20px;
-    border: 1px solid;
-    padding: 20px 60px;
+    font-size: 30px;
     cursor: pointer;
-    background-color: #4c5870ff;
-    color: #ebedecff;
-    border-radius: 15px;
+    
+    
+    
 }
 
 .index-select-area:hover {
-    background-color: #a2a9afff;
+    color: #a2a9afff;
+    text-decoration:underline;
 }
 
 .index-select-card {
