@@ -1,6 +1,6 @@
 var data;
 
-async function init(){
+async function initCityData(){
     let src1="https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0003-001?Authorization=CWB-107EDD1F-7B3D-45E1-B83C-4FB6EFAC75A4&format=JSON"
     await fetch(src1).then(function(response){
         return response.json()
@@ -10,54 +10,60 @@ async function init(){
     return data;
 }
 
-function getCityNumber(cityName){
+function getCityNumberOfCityNumber(cityName){
     switch(cityName){
         case "基隆市":
             return 95;
-        case "台北市":
+        case "臺北市":
             return 14;
         case "新北市":
             return 41;
         case "桃園市":
             return 18;
-        case "新竹市":
+        case "新竹縣":
             return 36;
-        case "苗栗市":
+        case "苗栗縣":
             return 7;
-        case "台中市":
+        case "臺中市":
             return 32;            
-        case "彰化市":
+        case "彰化縣":
             return 53;
-        case "南投市":
+        case "南投縣":
             return 39;
-        case "雲林市":
+        case "雲林縣":
             return 93;            
-        case "嘉義市":
+        case "嘉義縣":
             return 87;
-        case "台南市":
+        case "臺南市":
             return 139;
         case "高雄市":
             return 25;
-        case "屏東":
+        case "屏東縣":
             return 47;
-        case "台東市":
+        case "臺東縣":
             return 76;     
-        case "花蓮市":
+        case "花蓮縣":
             return 63;
-        case "宜蘭市":
+        case "宜蘭縣":
             return 44;  
-        case "澎湖市":
+        case "澎湖縣":
             return 40;    
-        case "金門市":
+        case "金門縣":
             return 120;
-        case "馬祖市":
-            return 22;                                                                                                                                                                                                                                                   
+        case "連江縣":
+            return 22;
+        // 加入嘉義市、新竹市 
+        case "新竹市":
+            return 36;
+        case "嘉義市":
+            return 87;
+                                                                                                                                                                                                                                                              
     }
 }
 // 給 city.js 用的變數
 var temp_weather_data;
 
-async function index_data(){
+async function initIndexData(){
     let src2="https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-107EDD1F-7B3D-45E1-B83C-4FB6EFAC75A4&format=JSON"
     await fetch(src2).then(function(response){
         return response.json()
@@ -69,47 +75,67 @@ async function index_data(){
     return temp_weather_data;
 }
 
-function getCityNumber_of_index_data(cityName){
+function getCityNumberOfIndexData(cityName){
     switch(cityName){
         case "基隆市":
             return 18;
-        case "台北市":
+        case "臺北市":
             return 5;
         case "新北市":
             return 1;
         case "桃園市":
             return 13;
-        case "新竹市":
+        case "新竹縣":
             return 3;
-        case "苗栗市":
+        case "新竹市":
+            return 4;
+        case "苗栗縣":
             return 8;
-        case "台中市":
+        case "臺中市":
             return 11;            
-        case "彰化市":
+        case "彰化縣":
             return 20;
-        case "南投市":
+        case "南投縣":
             return 14;
-        case "雲林市":
+        case "雲林縣":
             return 9;            
-        case "嘉義市":
+        case "嘉義縣":
             return 0;
-        case "台南市":
+        case "嘉義市":
+            return 2;
+        case "臺南市":
             return 6;
         case "高雄市":
             return 15;
-        case "屏東":
+        case "屏東縣":
             return 17;
-        case "台東市":
+        case "臺東縣":
             return 12;     
-        case "花蓮市":
+        case "花蓮縣":
             return 10;
-        case "宜蘭市":
+        case "宜蘭縣":
             return 7;  
-        case "澎湖市":
+        case "澎湖縣":
             return 19;    
-        case "金門市":
+        case "金門縣":
             return 16;
-        case "馬祖市":
+        case "連江縣":
             return 21;                                                                                                                                                                                                                                                   
     }
 }
+
+async function getIcon(){
+    let src3 = "https://alemapnil.github.io/wehelp-assignments/data/weatherIcon.json"
+    await fetch(src3).then(function(response){
+        return response.json()
+    }).then(function(result){
+        icon = result
+    })
+    return icon;
+}
+
+async function getIndex(){
+    let indexValue = await index()
+    console.log('首頁回傳資訊',indexValue)
+    }
+getIndex()
