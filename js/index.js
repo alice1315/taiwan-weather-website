@@ -54,41 +54,7 @@ async function index(){
             dateDiv.appendChild(document.createTextNode(`${date}`))
         }
 
-        //天氣描述與圖示連結
-        for (let w=0; w< Object.keys(weather_ob['天氣描述']).length; w++){
-            if (weather_ob['天氣描述'][w] == weather){
-                var iconUrl = weather_ob['圖示'][w] 
-                console.log(locationName,weather,iconUrl)
-            }
-        }
-        //製作縣市div
-        let index_weather_cards = document.createElement('div')
-        index_weather_cards.className='index-select-card'
-
-        let index_city = document.createElement('div')
-        index_city.className='index-city'
-        index_city.appendChild(document.createTextNode(locationName))
-        index_weather_cards.appendChild(index_city)
-
-        let index_temp = document.createElement('div')
-        index_temp.className='index-temp'
-        index_temp.appendChild(document.createTextNode(minT))
-        index_weather_cards.appendChild(index_temp)
-
-        let index_weather_icon = document.createElement('div')
-        index_weather_icon.className='index-temp'
-        index_weather_icon.style.width='80px'
-        index_weather_icon.style.height='80px'
-
-        let img = document.createElement('img')
-        img.src = iconUrl
-        img.style.width='100%'
-        img.style.height='100%'
-        index_weather_icon.appendChild(img)
-        index_weather_cards.appendChild(index_weather_icon)
-        document.getElementById('index-weather-cards').appendChild(index_weather_cards)
-
-
+        makeDiv(locationName,minT,weather)
         //將各縣市丟到東西南北區域
         whole_bk.push({'locationName':locationName,'minT':minT,'maxT':maxT,'weather':weather}) //全台
         if (part < 7){ //北部
@@ -121,16 +87,18 @@ async function index(){
     for (let i = 0; i < locationList.length; i++){
         locationList[i].addEventListener('click',toCity)
     }
-
-
 }
 
 
 
 //click town link to city.html
 function toCity(e){
-    cityName = this.innerHTML.split(',')[0]
-    location.href='../html/city.html'+`?city=${cityName}`
+    let cityName = this.querySelector('.index-city').innerHTML
+    let cityTemp = this.querySelector('.index-temp').innerHTML
+    let cityIcon = this.querySelector('.index-weather-icon img')['src']
+    console.log(cityName,cityTemp,cityIcon)
+
+    location.href='../html/city.html'+`?city=${cityName}&temp=${cityTemp}&icon=${cityIcon}`
 
 }
 
@@ -142,231 +110,37 @@ function blockClick(i){
     if (i == 0){ //全台
         for(let j = 0; j < whole_bk.length; j++){
             let locationName = whole_bk[j]['locationName'], minT = whole_bk[j]['minT'], maxT = whole_bk[j]['maxT'], weather = whole_bk[j]['weather']
-            for (let w=0; w< Object.keys(weather_ob['天氣描述']).length; w++){
-                if (weather_ob['天氣描述'][w] == weather){
-                    var iconUrl = weather_ob['圖示'][w] 
-                    console.log(locationName,weather,iconUrl)
-                }
-            }
-            //製作縣市div
-            let index_weather_cards = document.createElement('div')
-            index_weather_cards.className='index-select-card'
-    
-            let index_city = document.createElement('div')
-            index_city.className='index-city'
-            index_city.appendChild(document.createTextNode(locationName))
-            index_weather_cards.appendChild(index_city)
-    
-            let index_temp = document.createElement('div')
-            index_temp.className='index-temp'
-            index_temp.appendChild(document.createTextNode(minT))
-            index_weather_cards.appendChild(index_temp)
-    
-            let index_weather_icon = document.createElement('div')
-            index_weather_icon.className='index-temp'
-            index_weather_icon.style.width='80px'
-            index_weather_icon.style.height='80px'
-    
-            let img = document.createElement('img')
-            img.src = iconUrl
-            img.style.width='100%'
-            img.style.height='100%'
-            index_weather_icon.appendChild(img)
-            index_weather_cards.appendChild(index_weather_icon)
-            document.getElementById('index-weather-cards').appendChild(index_weather_cards)
-
+            makeDiv(locationName,minT,weather)
         }
     }
     else if(i == 1){// 北部
         for(let j = 0; j < north_bk.length; j++){
             let locationName = north_bk[j]['locationName'], minT = north_bk[j]['minT'], maxT = north_bk[j]['maxT'], weather = north_bk[j]['weather']
-            for (let w=0; w< Object.keys(weather_ob['天氣描述']).length; w++){
-                if (weather_ob['天氣描述'][w] == weather){
-                    var iconUrl = weather_ob['圖示'][w] 
-                    console.log(locationName,weather,iconUrl)
-                }
-            }
-            //製作縣市div
-            let index_weather_cards = document.createElement('div')
-            index_weather_cards.className='index-select-card'
-            
-            let index_city = document.createElement('div')
-            index_city.className='index-city'
-            index_city.appendChild(document.createTextNode(locationName))
-            index_weather_cards.appendChild(index_city)
-            
-            let index_temp = document.createElement('div')
-            index_temp.className='index-temp'
-            index_temp.appendChild(document.createTextNode(minT))
-            index_weather_cards.appendChild(index_temp)
-            
-            let index_weather_icon = document.createElement('div')
-            index_weather_icon.className='index-temp'
-            index_weather_icon.style.width='80px'
-            index_weather_icon.style.height='80px'
-            
-            let img = document.createElement('img')
-            img.src = iconUrl
-            img.style.width='100%'
-            img.style.height='100%'
-            index_weather_icon.appendChild(img)
-            index_weather_cards.appendChild(index_weather_icon)
-            document.getElementById('index-weather-cards').appendChild(index_weather_cards)
-
-
+            makeDiv(locationName,minT,weather)
         }
     }
     else if(i == 2){
         for(let j = 0; j < middle_bk.length; j++){
             let locationName = middle_bk[j]['locationName'], minT = middle_bk[j]['minT'], maxT = middle_bk[j]['maxT'], weather = middle_bk[j]['weather']
-            for (let w=0; w< Object.keys(weather_ob['天氣描述']).length; w++){
-                if (weather_ob['天氣描述'][w] == weather){
-                    var iconUrl = weather_ob['圖示'][w] 
-                    console.log(locationName,weather,iconUrl)
-                }
-            }
-            //製作縣市div
-            let index_weather_cards = document.createElement('div')
-            index_weather_cards.className='index-select-card'
-            
-            let index_city = document.createElement('div')
-            index_city.className='index-city'
-            index_city.appendChild(document.createTextNode(locationName))
-            index_weather_cards.appendChild(index_city)
-            
-            let index_temp = document.createElement('div')
-            index_temp.className='index-temp'
-            index_temp.appendChild(document.createTextNode(minT))
-            index_weather_cards.appendChild(index_temp)
-            
-            let index_weather_icon = document.createElement('div')
-            index_weather_icon.className='index-temp'
-            index_weather_icon.style.width='80px'
-            index_weather_icon.style.height='80px'
-            
-            let img = document.createElement('img')
-            img.src = iconUrl
-            img.style.width='100%'
-            img.style.height='100%'
-            index_weather_icon.appendChild(img)
-            index_weather_cards.appendChild(index_weather_icon)
-            document.getElementById('index-weather-cards').appendChild(index_weather_cards)
-
-
+            makeDiv(locationName,minT,weather)
         }
     }
     else if(i == 3){
         for(let j = 0; j < south_bk.length; j++){
             let locationName = south_bk[j]['locationName'], minT = south_bk[j]['minT'], maxT = south_bk[j]['maxT'], weather = south_bk[j]['weather']
-
-            for (let w=0; w< Object.keys(weather_ob['天氣描述']).length; w++){
-                if (weather_ob['天氣描述'][w] == weather){
-                    var iconUrl = weather_ob['圖示'][w] 
-                    console.log(locationName,weather,iconUrl)
-                }
-            }
-            //製作縣市div
-            let index_weather_cards = document.createElement('div')
-            index_weather_cards.className='index-select-card'
-            
-            let index_city = document.createElement('div')
-            index_city.className='index-city'
-            index_city.appendChild(document.createTextNode(locationName))
-            index_weather_cards.appendChild(index_city)
-            
-            let index_temp = document.createElement('div')
-            index_temp.className='index-temp'
-            index_temp.appendChild(document.createTextNode(minT))
-            index_weather_cards.appendChild(index_temp)
-            
-            let index_weather_icon = document.createElement('div')
-            index_weather_icon.className='index-temp'
-            index_weather_icon.style.width='80px'
-            index_weather_icon.style.height='80px'
-            
-            let img = document.createElement('img')
-            img.src = iconUrl
-            img.style.width='100%'
-            img.style.height='100%'
-            index_weather_icon.appendChild(img)
-            index_weather_cards.appendChild(index_weather_icon)
-            document.getElementById('index-weather-cards').appendChild(index_weather_cards)
+            makeDiv(locationName,minT,weather)
         }
     }
     else if(i == 4){
         for(let j = 0; j < east_bk.length; j++){
             let locationName = east_bk[j]['locationName'], minT = east_bk[j]['minT'], maxT = east_bk[j]['maxT'], weather = east_bk[j]['weather']
-
-            for (let w=0; w< Object.keys(weather_ob['天氣描述']).length; w++){
-                if (weather_ob['天氣描述'][w] == weather){
-                    var iconUrl = weather_ob['圖示'][w] 
-                    console.log(locationName,weather,iconUrl)
-                }
-            }
-            //製作縣市div
-            let index_weather_cards = document.createElement('div')
-            index_weather_cards.className='index-select-card'
-            
-            let index_city = document.createElement('div')
-            index_city.className='index-city'
-            index_city.appendChild(document.createTextNode(locationName))
-            index_weather_cards.appendChild(index_city)
-            
-            let index_temp = document.createElement('div')
-            index_temp.className='index-temp'
-            index_temp.appendChild(document.createTextNode(minT))
-            index_weather_cards.appendChild(index_temp)
-            
-            let index_weather_icon = document.createElement('div')
-            index_weather_icon.className='index-temp'
-            index_weather_icon.style.width='80px'
-            index_weather_icon.style.height='80px'
-            
-            let img = document.createElement('img')
-            img.src = iconUrl
-            img.style.width='100%'
-            img.style.height='100%'
-            index_weather_icon.appendChild(img)
-            index_weather_cards.appendChild(index_weather_icon)
-            document.getElementById('index-weather-cards').appendChild(index_weather_cards)
+            makeDiv(locationName,minT,weather)
         }
     }
     else{
         for(let j = 0; j < offshore_bk.length; j++){
             let locationName = offshore_bk[j]['locationName'], minT = offshore_bk[j]['minT'], maxT = offshore_bk[j]['maxT'], weather = offshore_bk[j]['weather']
-
-            for (let w=0; w< Object.keys(weather_ob['天氣描述']).length; w++){
-                if (weather_ob['天氣描述'][w] == weather){
-                    var iconUrl = weather_ob['圖示'][w] 
-                    console.log(locationName,weather,iconUrl)
-                }
-            }
-            //製作縣市div
-            let index_weather_cards = document.createElement('div')
-            index_weather_cards.className='index-select-card'
-            
-            let index_city = document.createElement('div')
-            index_city.className='index-city'
-            index_city.appendChild(document.createTextNode(locationName))
-            index_weather_cards.appendChild(index_city)
-            
-            let index_temp = document.createElement('div')
-            index_temp.className='index-temp'
-            index_temp.appendChild(document.createTextNode(minT))
-            index_weather_cards.appendChild(index_temp)
-            
-            let index_weather_icon = document.createElement('div')
-            index_weather_icon.className='index-temp'
-            index_weather_icon.style.width='80px'
-            index_weather_icon.style.height='80px'
-            
-            let img = document.createElement('img')
-            img.src = iconUrl
-            img.style.width='100%'
-            img.style.height='100%'
-            index_weather_icon.appendChild(img)
-            index_weather_cards.appendChild(index_weather_icon)
-            document.getElementById('index-weather-cards').appendChild(index_weather_cards)
+            makeDiv(locationName,minT,weather)
         }
     }
 
@@ -375,9 +149,45 @@ function blockClick(i){
     for (let i = 0; i < locationList.length; i++){
         locationList[i].addEventListener('click',toCity)
     }
-
 }
 
+
+function makeDiv(locationName,minT,weather){
+    for (let w=0; w< Object.keys(weather_ob['天氣描述']).length; w++){
+        if (weather_ob['天氣描述'][w] == weather){
+            var iconUrl = weather_ob['圖示'][w] 
+        }
+    }
+    //製作縣市div
+    let index_weather_cards = document.createElement('div')
+    index_weather_cards.className='index-select-card'
+    
+    let index_city = document.createElement('div')
+    index_city.className='index-city'
+    index_city.appendChild(document.createTextNode(locationName))
+    index_weather_cards.appendChild(index_city)
+    
+    let index_temp = document.createElement('div')
+    index_temp.className='index-temp'
+    index_temp.appendChild(document.createTextNode(minT))
+    index_weather_cards.appendChild(index_temp)
+    
+    let index_weather_icon = document.createElement('div')
+    index_weather_icon.className='index-weather-icon'
+    index_weather_icon.style.width='80px'
+    index_weather_icon.style.height='80px'
+    
+    let img = document.createElement('img')
+    img.src = iconUrl
+    img.alt = weather
+    img.style.width='100%'
+    img.style.height='100%'
+    index_weather_icon.appendChild(img)
+    index_weather_cards.appendChild(index_weather_icon)
+    document.getElementById('index-weather-cards').appendChild(index_weather_cards)
+
+
+}
 
 async function getFetch(url){
     try{
