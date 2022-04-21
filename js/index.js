@@ -1,13 +1,5 @@
 async function index(){
     let src1="https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-107EDD1F-7B3D-45E1-B83C-4FB6EFAC75A4&format=JSON"
-    //
-    // let src2="https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0003-001?Authorization=CWB-107EDD1F-7B3D-45E1-B83C-4FB6EFAC75A4&format=JSON"
-    // let weather_result = await getFetch(src2)
-    // data = weather_result["records"]["location"]
-
-    // weather_data_Keelung=weather_result["records"]["location"][95];
-    // console.log(weather_data_Keelung["locationName"])
-    //
     
     let data_36hr = await getFetch(src1)
     let old_records_36hr = data_36hr['records']['location']
