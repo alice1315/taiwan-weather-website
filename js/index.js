@@ -95,7 +95,7 @@ async function index(){
 function toCity(e){
     let cityName = this.querySelector('.index-city').innerHTML
     let cityTemp = this.querySelector('.index-temp').innerHTML
-    let cityIcon = this.querySelector('.index-weather-icon img')['alt']
+    let cityIcon = this.querySelector('.index-weather-icon img')['src']
     console.log(cityName,cityTemp,cityIcon)
 
     location.href='../html/city.html'+`?city=${cityName}&temp=${cityTemp}&icon=${cityIcon}`
