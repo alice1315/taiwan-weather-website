@@ -18,34 +18,6 @@ $gradient-bottom-left: linear-gradient(315deg, #3d3d3bff, #4c5870ff, #ebedecff, 
 $gradient-radial: radial-gradient(#3d3d3bff, #4c5870ff, #ebedecff, #a2a9afff);
  */ 
 
-header {
-    background: rgba(162, 169, 175, 0.2);
-    height: 90px;
-}
-
-
-.index-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 1200px; 
-    height: 90px; 
-    margin: 0 auto;
-}
-
-.index-title a {
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 36px;
-    text-decoration: none;
-    color: #4c5870ff;
-}
-
-.index-date {
-    font-family: 'Noto Sans TC', sans-serif;
-    font-size: 20px;
-    color: #a2a9afff;
-}
-
 .index-areas {
     display: flex;
     justify-content: space-around;
@@ -98,28 +70,10 @@ header {
     color: #3d3d3bff;
 }
 
-.index-weather-icon {
-    /* font-size: 40px;
-    margin-right: 50px;
-    text-align: center; */
-}
-
 @media(max-width:1200px){
-    .index-header {
-        width: 90%; 
-    }
-
     .index-areas, .index-select-card {
         justify-content: space-around;
         width: 90%; 
-    }
-
-    .index-title a {
-        font-size: 25px;
-    }
-
-    .index-date {
-        font-size: 16px;
     }
 
     .index-select-area

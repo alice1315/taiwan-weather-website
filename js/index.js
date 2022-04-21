@@ -104,10 +104,12 @@ function toCity(e){
     let cityName = this.querySelector('.index-city').innerHTML
     let cityTemp = this.querySelector('.index-temp').innerHTML
     let cityIcon = this.querySelector('.index-weather-icon img')['src']
+    let weather = this.querySelector('.index-weather-icon img')['title']
 
     sessionStorage.setItem("date", date);
     sessionStorage.setItem("cityTemp", cityTemp);
     sessionStorage.setItem("cityIcon", cityIcon);
+    sessionStorage.setItem("weather", weather);
     
     location.href='../html/city.html'+`?city=${cityName}`
 }

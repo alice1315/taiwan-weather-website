@@ -2,9 +2,11 @@ var data;
 var city;
 var cityNumber;
 var cityNumberOfIndexData;
+
 var cityTemp;
 var cityIcon;
 var date;
+var weather;
 
 async function cityInit(){
     data = await initCityData();
@@ -25,6 +27,7 @@ async function getCityInfo(){
     date = sessionStorage.getItem("date");
     cityTemp = sessionStorage.getItem("cityTemp");
     cityIcon = sessionStorage.getItem("cityIcon");
+    weather = sessionStorage.getItem("weather");
 }
 
 function renderPage(){
@@ -41,6 +44,7 @@ function renderPage(){
     cityName.textContent = city;
     cityWeather.textContent = cityTemp;
     cityWeatherIcon.src = cityIcon;
+    cityWeatherIcon.title = weather;
     cityWdsdInfo.textContent = data[cityNumber]["weatherElement"][2]["elementValue"] + " m/s";
     
     if(data[cityNumber]["weatherElement"][5]["elementValue"] == -99){

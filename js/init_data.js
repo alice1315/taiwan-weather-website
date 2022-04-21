@@ -126,8 +126,3 @@ async function getIcons(){
     })
     return icon;
 }
-
-async function getIndex(){
-    let indexValue = await index()
-    console.log('首頁回傳資訊',indexValue)
-}
