@@ -1,11 +1,6 @@
 async function index(){
-    let src1="https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-107EDD1F-7B3D-45E1-B83C-4FB6EFAC75A4&format=JSON"
-    
-    let data_36hr = await getFetch(src1)
-    let old_records_36hr = data_36hr['records']['location']
-
-    let whIcon = await getFetch('https://alemapnil.github.io/wehelp-assignments/data/weatherIcon.json')
-
+    let old_records_36hr = await initIndexData()
+    let whIcon = await getIcon()
 
     //使縣市有南北順序排列
     let records_36hr=[]
@@ -29,13 +24,16 @@ async function index(){
         let locationName = row['locationName']
         let startTime = row['weatherElement'][0]['time'][0]['startTime'], endTime = row['weatherElement'][0]['time'][0]['endTime']
         let weather =  row['weatherElement'][0]['time'][0]['parameter']['parameterName'] 
-        let minT =  row['weatherElement'][2]['time'][0]['parameter']['parameterName']+'°'+row['weatherElement'][2]['time'][0]['parameter']['parameterUnit']
-        let maxT = row['weatherElement'][4]['time'][0]['parameter']['parameterName']+'°'+row['weatherElement'][4]['time'][0]['parameter']['parameterUnit']
+        let minT =  parseInt(row['weatherElement'][2]['time'][0]['parameter']['parameterName'])
+        let maxT = parseInt(row['weatherElement'][4]['time'][0]['parameter']['parameterName'])
         let date = startTime.split(' ')[0], startHr = parseInt(startTime.split(' ')[1].split(':'))
 
+        let averageT = Math.round((minT+maxT)/2)+'°'+row['weatherElement'][2]['time'][0]['parameter']['parameterUnit']
+
+    
 
         if (Object.keys(weather_ob).length==0){
-            if (startHr<6 || startHr>18){
+            if (startHr<6 || startHr>=18){
                 console.log('night',startTime)
                 weather_ob['天氣描述']= whIcon['天氣描述']
                 weather_ob['圖示'] = whIcon['夜晚圖示']
@@ -60,25 +58,25 @@ async function index(){
             }
         }
 
-        console.log(locationName,minT,weather)
-        makeDiv(locationName,minT,weather, iconUrl)
+        console.log(locationName,averageT,weather)
+        makeDiv(locationName,averageT,weather,iconUrl)
 
         //將各縣市丟到東西南北區域
-        whole_bk.push({'locationName':locationName,'minT':minT,'maxT':maxT,'weather':weather,'icon':iconUrl}) //全台
+        whole_bk.push({'locationName':locationName,'averageT':averageT,'weather':weather,'icon':iconUrl}) //全台
         if (part < 7){ //北部
-            north_bk.push({'locationName':locationName,'minT':minT,'maxT':maxT,'weather':weather,'icon':iconUrl})
+            north_bk.push({'locationName':locationName,'averageT':averageT,'weather':weather,'icon':iconUrl})
         }
         else if (7 <= part && part< 13){ //中部
-            middle_bk.push({'locationName':locationName,'minT':minT,'maxT':maxT,'weather':weather,'icon':iconUrl})
+            middle_bk.push({'locationName':locationName,'averageT':averageT,'weather':weather,'icon':iconUrl})
         }
         else if (13 <= part && part < 16){ //南部
-            south_bk.push({'locationName':locationName,'minT':minT,'maxT':maxT,'weather':weather,'icon':iconUrl})
+            south_bk.push({'locationName':locationName,'averageT':averageT,'weather':weather,'icon':iconUrl})
         }
         else if (16 <= part && part < 19){ //東部
-            east_bk.push({'locationName':locationName,'minT':minT,'maxT':maxT,'weather':weather,'icon':iconUrl})
+            east_bk.push({'locationName':locationName,'averageT':averageT,'weather':weather,'icon':iconUrl})
         }
         else if (19 <= part && part< 22){ //離島
-            offshore_bk.push({'locationName':locationName,'minT':minT,'maxT':maxT,'weather':weather,'icon':iconUrl})
+            offshore_bk.push({'locationName':locationName,'averageT':averageT,'weather':weather,'icon':iconUrl})
         }        
     }
 
@@ -112,47 +110,46 @@ function toCity(e){
 //製作各button東西南北的縣市資料
 function blockClick(i){
     document.getElementById('index-weather-cards').innerHTML = ''
-    console.log('-------')
     if (i == 0){ //全台
         for(let j = 0; j < whole_bk.length; j++){
-            let locationName = whole_bk[j]['locationName'], minT = whole_bk[j]['minT'], maxT = whole_bk[j]['maxT'], weather = whole_bk[j]['weather']
+            let locationName = whole_bk[j]['locationName'], averageT = whole_bk[j]['averageT'], weather = whole_bk[j]['weather']
             iconUrl = whole_bk[j]['icon']
-            makeDiv(locationName,minT,weather,iconUrl)
+            makeDiv(locationName,averageT,weather,iconUrl)
         }
     }
     else if(i == 1){// 北部
         for(let j = 0; j < north_bk.length; j++){
-            let locationName = north_bk[j]['locationName'], minT = north_bk[j]['minT'], maxT = north_bk[j]['maxT'], weather = north_bk[j]['weather']
+            let locationName = north_bk[j]['locationName'], averageT = north_bk[j]['averageT'], weather = north_bk[j]['weather']
             iconUrl = north_bk[j]['icon']
-            makeDiv(locationName,minT,weather,iconUrl)
+            makeDiv(locationName,averageT,weather,iconUrl)
         }
     }
     else if(i == 2){
         for(let j = 0; j < middle_bk.length; j++){
-            let locationName = middle_bk[j]['locationName'], minT = middle_bk[j]['minT'], maxT = middle_bk[j]['maxT'], weather = middle_bk[j]['weather']
+            let locationName = middle_bk[j]['locationName'], averageT = middle_bk[j]['averageT'], weather = middle_bk[j]['weather']
             iconUrl = middle_bk[j]['icon']
-            makeDiv(locationName,minT,weather,iconUrl)
+            makeDiv(locationName,averageT,weather,iconUrl)
         }
     }
     else if(i == 3){
         for(let j = 0; j < south_bk.length; j++){
-            let locationName = south_bk[j]['locationName'], minT = south_bk[j]['minT'], maxT = south_bk[j]['maxT'], weather = south_bk[j]['weather']
+            let locationName = south_bk[j]['locationName'], averageT = south_bk[j]['averageT'], weather = south_bk[j]['weather']
             iconUrl = south_bk[j]['icon']
-            makeDiv(locationName,minT,weather,iconUrl)
+            makeDiv(locationName,averageT,weather,iconUrl)
         }
     }
     else if(i == 4){
         for(let j = 0; j < east_bk.length; j++){
-            let locationName = east_bk[j]['locationName'], minT = east_bk[j]['minT'], maxT = east_bk[j]['maxT'], weather = east_bk[j]['weather']
+            let locationName = east_bk[j]['locationName'], averageT = east_bk[j]['averageT'], weather = east_bk[j]['weather']
             iconUrl = east_bk[j]['icon']
-            makeDiv(locationName,minT,weather,iconUrl)
+            makeDiv(locationName,averageT,weather,iconUrl)
         }
     }
     else{
         for(let j = 0; j < offshore_bk.length; j++){
-            let locationName = offshore_bk[j]['locationName'], minT = offshore_bk[j]['minT'], maxT = offshore_bk[j]['maxT'], weather = offshore_bk[j]['weather']
+            let locationName = offshore_bk[j]['locationName'], averageT = offshore_bk[j]['averageT'], weather = offshore_bk[j]['weather']
             iconUrl = offshore_bk[j]['icon']
-            makeDiv(locationName,minT,weather,iconUrl)
+            makeDiv(locationName,averageT,weather,iconUrl)
         }
     }
 
@@ -163,7 +160,7 @@ function blockClick(i){
     }
 }
 
-function makeDiv(locationName,minT,weather,iconUrl){
+function makeDiv(locationName,averageT,weather,iconUrl){
 
     //製作縣市div
     let index_weather_cards = document.createElement('div')
@@ -176,7 +173,7 @@ function makeDiv(locationName,minT,weather,iconUrl){
     
     let index_temp = document.createElement('div')
     index_temp.className='index-temp'
-    index_temp.appendChild(document.createTextNode(minT))
+    index_temp.appendChild(document.createTextNode(averageT))
     index_weather_cards.appendChild(index_temp)
     
     let index_weather_icon = document.createElement('div')
