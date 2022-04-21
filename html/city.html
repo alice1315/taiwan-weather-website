@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="../css/index.css">
         <link rel="stylesheet" href="../css/city.css"/>
     </head>
-    <body>
+    <body onload="cityInit();">
         <header>
             <div class="index-header">
                 <div class="index-title"><a href="./index.html">台灣氣象觀測站</a></div>
@@ -18,13 +18,14 @@
         <div class="city-section">
             <div class="city-section-left">
     <!-- 城市名稱 --><div class="city-name">
+                        <span></span>
         <!-- 氣相圖示 --> <img class="city-weather-icon-img" src=""/>
                     </div> 
     <!-- 城市氣溫 --><div class="city-weather"></div>
             </div>
             <div class="city-section-right">
                 <div class="city-section-right-frame">
-                    <div class="city-WindDir">風向</div>
+                    <div class="city-WindDir">風速</div>
     <!-- 風向內容 --><div class="city-WindDir-info"></div> 
                 </div>
                 <div class="city-section-right-frame">
@@ -38,7 +39,7 @@
             </div>
         </div>
         <div id="city-button" class="city-back-to-indexPage">回首頁</div>
-        <script src="../js/index.js"></script> 
+        <script src="../js/city.js"></script> 
         <script src="../js/init_data.js"></script> 
     </body>
 </html>
