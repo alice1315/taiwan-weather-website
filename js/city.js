@@ -9,6 +9,7 @@ var date;
 var weather;
 
 async function cityInit(){
+    await loadFunc()
     data = await initCityData();
     getCity();
     getCityInfo();
@@ -31,6 +32,9 @@ async function getCityInfo(){
 }
 
 function renderPage(){
+    document.querySelector('.main').style.display = 'block' //背景顯示
+    document.getElementById('loadGif').style.display = 'none' // 載入消失
+
     let dateDiv = document.querySelector('.index-date');
     let cityName = document.querySelector(".city-name > span");
     let cityWeather = document.querySelector(".city-weather");
@@ -56,7 +60,6 @@ function renderPage(){
     cityRHInfo.textContent = data[cityNumber]["weatherElement"][4]["elementValue"]*100 + " %";
     city_section.style.backgroundImage = "url('../static/pics/"+cityNumber+".jpg')"
     city_section.style.objectFit = "cover";
-    // document.getElementById("loadGif").style.display="none";
 }
 
 function toIndex(){
@@ -69,3 +72,20 @@ function toIndex(){
 
 
 
+async function loadFunc(){
+    document.querySelector('.main').style.display = 'none' //背景消失
+    let load_div = document.createElement('div')
+    load_div.id='loadGif'
+    load_div.style.display='flex'
+    load_div.style.justifyContent='center'
+    load_div.style.marginTop='40px'
+    let loading = document.createElement('img')
+    loading.src='../static/pics/loading.gif'
+    loading.style.width='40px'
+    loading.style.height='40px'
+    loading.style.margin='0 auto'
+    load_div.appendChild(loading)   
+    document.body.appendChild(load_div)
+
+    await new Promise(resolve => setTimeout(resolve, 500));
+}
