@@ -54,23 +54,31 @@ async function index(){
             dateDiv.appendChild(document.createTextNode(`${date}`))
         }
 
-        makeDiv(locationName,minT,weather)
+        for (let w=0; w< Object.keys(weather_ob['天氣描述']).length; w++){
+            if (weather_ob['天氣描述'][w] == weather){
+                iconUrl = weather_ob['圖示'][w] 
+            }
+        }
+
+        console.log(locationName,minT,weather)
+        makeDiv(locationName,minT,weather, iconUrl)
+
         //將各縣市丟到東西南北區域
-        whole_bk.push({'locationName':locationName,'minT':minT,'maxT':maxT,'weather':weather}) //全台
+        whole_bk.push({'locationName':locationName,'minT':minT,'maxT':maxT,'weather':weather,'icon':iconUrl}) //全台
         if (part < 7){ //北部
-            north_bk.push({'locationName':locationName,'minT':minT,'maxT':maxT,'weather':weather})
+            north_bk.push({'locationName':locationName,'minT':minT,'maxT':maxT,'weather':weather,'icon':iconUrl})
         }
         else if (7 <= part && part< 13){ //中部
-            middle_bk.push({'locationName':locationName,'minT':minT,'maxT':maxT,'weather':weather})
+            middle_bk.push({'locationName':locationName,'minT':minT,'maxT':maxT,'weather':weather,'icon':iconUrl})
         }
         else if (13 <= part && part < 16){ //南部
-            south_bk.push({'locationName':locationName,'minT':minT,'maxT':maxT,'weather':weather})
+            south_bk.push({'locationName':locationName,'minT':minT,'maxT':maxT,'weather':weather,'icon':iconUrl})
         }
         else if (16 <= part && part < 19){ //東部
-            east_bk.push({'locationName':locationName,'minT':minT,'maxT':maxT,'weather':weather})
+            east_bk.push({'locationName':locationName,'minT':minT,'maxT':maxT,'weather':weather,'icon':iconUrl})
         }
         else if (19 <= part && part< 22){ //離島
-            offshore_bk.push({'locationName':locationName,'minT':minT,'maxT':maxT,'weather':weather})
+            offshore_bk.push({'locationName':locationName,'minT':minT,'maxT':maxT,'weather':weather,'icon':iconUrl})
         }        
     }
 
@@ -87,9 +95,9 @@ async function index(){
     for (let i = 0; i < locationList.length; i++){
         locationList[i].addEventListener('click',toCity)
     }
+
+    return whole_bk
 }
-
-
 
 //click town link to city.html
 function toCity(e){
@@ -97,9 +105,7 @@ function toCity(e){
     let cityTemp = this.querySelector('.index-temp').innerHTML
     let cityIcon = this.querySelector('.index-weather-icon img')['src']
     console.log(cityName,cityTemp,cityIcon)
-
-    location.href='../html/city.html'+`?city=${cityName}&temp=${cityTemp}&icon=${cityIcon}`
-
+    location.href='../html/city.html'+`?city=${cityName}`
 }
 
 
@@ -110,37 +116,43 @@ function blockClick(i){
     if (i == 0){ //全台
         for(let j = 0; j < whole_bk.length; j++){
             let locationName = whole_bk[j]['locationName'], minT = whole_bk[j]['minT'], maxT = whole_bk[j]['maxT'], weather = whole_bk[j]['weather']
-            makeDiv(locationName,minT,weather)
+            iconUrl = whole_bk[j]['icon']
+            makeDiv(locationName,minT,weather,iconUrl)
         }
     }
     else if(i == 1){// 北部
         for(let j = 0; j < north_bk.length; j++){
             let locationName = north_bk[j]['locationName'], minT = north_bk[j]['minT'], maxT = north_bk[j]['maxT'], weather = north_bk[j]['weather']
-            makeDiv(locationName,minT,weather)
+            iconUrl = north_bk[j]['icon']
+            makeDiv(locationName,minT,weather,iconUrl)
         }
     }
     else if(i == 2){
         for(let j = 0; j < middle_bk.length; j++){
             let locationName = middle_bk[j]['locationName'], minT = middle_bk[j]['minT'], maxT = middle_bk[j]['maxT'], weather = middle_bk[j]['weather']
-            makeDiv(locationName,minT,weather)
+            iconUrl = middle_bk[j]['icon']
+            makeDiv(locationName,minT,weather,iconUrl)
         }
     }
     else if(i == 3){
         for(let j = 0; j < south_bk.length; j++){
             let locationName = south_bk[j]['locationName'], minT = south_bk[j]['minT'], maxT = south_bk[j]['maxT'], weather = south_bk[j]['weather']
-            makeDiv(locationName,minT,weather)
+            iconUrl = south_bk[j]['icon']
+            makeDiv(locationName,minT,weather,iconUrl)
         }
     }
     else if(i == 4){
         for(let j = 0; j < east_bk.length; j++){
             let locationName = east_bk[j]['locationName'], minT = east_bk[j]['minT'], maxT = east_bk[j]['maxT'], weather = east_bk[j]['weather']
-            makeDiv(locationName,minT,weather)
+            iconUrl = east_bk[j]['icon']
+            makeDiv(locationName,minT,weather,iconUrl)
         }
     }
     else{
         for(let j = 0; j < offshore_bk.length; j++){
             let locationName = offshore_bk[j]['locationName'], minT = offshore_bk[j]['minT'], maxT = offshore_bk[j]['maxT'], weather = offshore_bk[j]['weather']
-            makeDiv(locationName,minT,weather)
+            iconUrl = offshore_bk[j]['icon']
+            makeDiv(locationName,minT,weather,iconUrl)
         }
     }
 
@@ -151,13 +163,8 @@ function blockClick(i){
     }
 }
 
+function makeDiv(locationName,minT,weather,iconUrl){
 
-function makeDiv(locationName,minT,weather){
-    for (let w=0; w< Object.keys(weather_ob['天氣描述']).length; w++){
-        if (weather_ob['天氣描述'][w] == weather){
-            var iconUrl = weather_ob['圖示'][w] 
-        }
-    }
     //製作縣市div
     let index_weather_cards = document.createElement('div')
     index_weather_cards.className='index-select-card'
@@ -223,6 +230,4 @@ let arr =[{county:"基隆市",id:0},
 {county:"連江縣",id:21},]
 
 
-let whole_bk=[] ,north_bk=[], middle_bk=[], south_bk=[], east_bk=[], offshore_bk=[], weather_ob={}
-
-index()
+let whole_bk=[] ,north_bk=[], middle_bk=[], south_bk=[], east_bk=[], offshore_bk=[], weather_ob={}, iconUrl
