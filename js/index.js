@@ -190,6 +190,7 @@ function makeDiv(locationName,averageT,weather,iconUrl){
     let img = document.createElement('img')
     img.src = iconUrl
     img.alt = weather
+    img.title = weather
     img.style.width='100%'
     img.style.height='100%'
     index_weather_icon.appendChild(img)
