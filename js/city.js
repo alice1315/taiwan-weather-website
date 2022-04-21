@@ -42,10 +42,17 @@ function renderPage(){
     cityWeather.textContent = cityTemp;
     cityWeatherIcon.src = cityIcon;
     cityWdsdInfo.textContent = data[cityNumber]["weatherElement"][2]["elementValue"] + " m/s";
-    cityAPInfo.textContent = data[cityNumber]["weatherElement"][5]["elementValue"] + " hPa";
-    cityRHInfo.textContent = data[cityNumber]["weatherElement"][4]["elementValue"] + " %";
+    
+    if(data[cityNumber]["weatherElement"][5]["elementValue"] == -99){
+        cityAPInfo.textContent = "測站異常"
+        cityAPInfo.style.textDecoration = "none"
+    }else{
+        cityAPInfo.textContent = data[cityNumber]["weatherElement"][5]["elementValue"] + " hPa";
+    }
+    cityRHInfo.textContent = data[cityNumber]["weatherElement"][4]["elementValue"]*100 + " %";
     city_section.style.backgroundImage = "url('../static/pics/"+cityNumber+".jpg')"
     city_section.style.objectFit = "cover";
+    // document.getElementById("loadGif").style.display="none";
 }
 
 function toIndex(){
@@ -54,3 +61,7 @@ function toIndex(){
         location.href = "../html/index.html";
     })
 }
+
+
+
+
