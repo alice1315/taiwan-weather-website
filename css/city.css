@@ -196,3 +196,17 @@ body {
         padding-right: 0px;
     }
 }
+
+@media screen and (max-width: 450px){
+    .city-name{
+        font-size: 44px;
+    }
+    .city-weather{
+        font-size: 86px;
+    }
+
+    .city-section-right-frame{
+        grid-template-columns: repeat(1, 100px) auto;
+        font-size: 26px;
+    }
+}
