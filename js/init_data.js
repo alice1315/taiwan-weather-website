@@ -117,7 +117,7 @@ function getCityNumberOfIndexData(cityName){
     }
 }
 
-async function getIcon(){
+async function getIcons(){
     let src3 = "https://alemapnil.github.io/wehelp-assignments/data/weatherIcon.json"
     await fetch(src3).then(function(response){
         return response.json()
@@ -130,5 +130,4 @@ async function getIcon(){
 async function getIndex(){
     let indexValue = await index()
     console.log('首頁回傳資訊',indexValue)
-    }
-// getIndex()
+}
