@@ -1,6 +1,10 @@
 async function index(){
+
     let old_records_36hr = await initIndexData()
     let whIcon = await getIcons()
+
+    await new Promise(resolve => setTimeout(resolve, 500));
+
 
     //使縣市有南北順序排列
     let records_36hr=[]
@@ -56,6 +60,7 @@ async function index(){
             }
         }
 
+        
         makeDiv(locationName,averageT,weather,iconUrl)
         document.getElementById('loadGif').style.display='none'
 
@@ -236,5 +241,6 @@ function loadFunc(){
     load_div.appendChild(loading)    
     document.getElementById('index-weather-cards').appendChild(load_div)
 }
+
 
 loadFunc()
