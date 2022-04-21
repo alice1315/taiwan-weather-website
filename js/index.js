@@ -1,6 +1,6 @@
 async function index(){
     let old_records_36hr = await initIndexData()
-    let whIcon = await getIcon()
+    let whIcon = await getIcons()
 
     //使縣市有南北順序排列
     let records_36hr=[]
@@ -34,12 +34,10 @@ async function index(){
 
         if (Object.keys(weather_ob).length==0){
             if (startHr<6 || startHr>=18){
-                console.log('night',startTime)
                 weather_ob['天氣描述']= whIcon['天氣描述']
                 weather_ob['圖示'] = whIcon['夜晚圖示']
             }
             else{
-                console.log('day',startTime)
                 weather_ob['天氣描述']= whIcon['天氣描述']
                 weather_ob['圖示'] = whIcon['白天圖示']
             }            
@@ -57,8 +55,6 @@ async function index(){
                 iconUrl = weather_ob['圖示'][w] 
             }
         }
-
-        console.log(locationName,averageT,weather)
 
         makeDiv(locationName,averageT,weather,iconUrl)
         document.getElementById('loadGif').style.display='none'
@@ -95,16 +91,19 @@ async function index(){
     for (let i = 0; i < locationList.length; i++){
         locationList[i].addEventListener('click',toCity)
     }
-
-    return whole_bk
 }
 
 //click town link to city.html
 function toCity(e){
+    let date = document.querySelector('.index-date').innerHTML
     let cityName = this.querySelector('.index-city').innerHTML
     let cityTemp = this.querySelector('.index-temp').innerHTML
     let cityIcon = this.querySelector('.index-weather-icon img')['src']
-    console.log(cityName,cityTemp,cityIcon)
+
+    sessionStorage.setItem("date", date);
+    sessionStorage.setItem("cityTemp", cityTemp);
+    sessionStorage.setItem("cityIcon", cityIcon);
+    
     location.href='../html/city.html'+`?city=${cityName}`
 }
 
@@ -193,16 +192,6 @@ function makeDiv(locationName,averageT,weather,iconUrl){
     document.getElementById('index-weather-cards').appendChild(index_weather_cards)
 
 
-}
-
-async function getFetch(url){
-    try{
-            let res =  await fetch(url)
-            if (res.status === 200){
-                let data = await res.json() 
-                return data          
-            }        
-    }catch(e){console.log('GET 錯誤 >>', e)};
 }
 
 let arr =[{county:"基隆市",id:0},

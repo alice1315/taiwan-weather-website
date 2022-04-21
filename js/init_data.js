@@ -1,5 +1,3 @@
-var data;
-
 async function initCityData(){
     let src1="https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0003-001?Authorization=CWB-107EDD1F-7B3D-45E1-B83C-4FB6EFAC75A4&format=JSON"
     await fetch(src1).then(function(response){
@@ -10,7 +8,7 @@ async function initCityData(){
     return data;
 }
 
-function getCityNumberOfCityNumber(cityName){
+function getCityNumberOfCityData(cityName){
     switch(cityName){
         case "基隆市":
             return 95;
@@ -52,7 +50,6 @@ function getCityNumberOfCityNumber(cityName){
             return 120;
         case "連江縣":
             return 22;
-        // 加入嘉義市、新竹市 
         case "新竹市":
             return 36;
         case "嘉義市":
@@ -60,16 +57,12 @@ function getCityNumberOfCityNumber(cityName){
                                                                                                                                                                                                                                                               
     }
 }
-// 給 city.js 用的變數
-var temp_weather_data;
 
 async function initIndexData(){
     let src2="https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-107EDD1F-7B3D-45E1-B83C-4FB6EFAC75A4&format=JSON"
     await fetch(src2).then(function(response){
         return response.json()
     }).then(function(temp_result){
-        console.log(temp_result)
-        // 給 city.js 用的變數
         temp_weather_data = temp_result["records"]["location"]
     })
     return temp_weather_data;
@@ -124,7 +117,7 @@ function getCityNumberOfIndexData(cityName){
     }
 }
 
-async function getIcon(){
+async function getIcons(){
     let src3 = "https://alemapnil.github.io/wehelp-assignments/data/weatherIcon.json"
     await fetch(src3).then(function(response){
         return response.json()
@@ -137,5 +130,4 @@ async function getIcon(){
 async function getIndex(){
     let indexValue = await index()
     console.log('首頁回傳資訊',indexValue)
-    }
-getIndex()
+}
