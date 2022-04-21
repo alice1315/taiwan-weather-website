@@ -59,7 +59,9 @@ async function index(){
         }
 
         console.log(locationName,averageT,weather)
+
         makeDiv(locationName,averageT,weather,iconUrl)
+        document.getElementById('loadGif').style.display='none'
 
         //將各縣市丟到東西南北區域
         whole_bk.push({'locationName':locationName,'averageT':averageT,'weather':weather,'icon':iconUrl}) //全台
@@ -228,3 +230,22 @@ let arr =[{county:"基隆市",id:0},
 
 
 let whole_bk=[] ,north_bk=[], middle_bk=[], south_bk=[], east_bk=[], offshore_bk=[], weather_ob={}, iconUrl
+
+
+
+//製作loading效果
+function loadFunc(){
+    let load_div = document.createElement('div')
+    load_div.id='loadGif'
+    load_div.style.display='flex'
+    load_div.style.justifyContent='center'
+    let loading = document.createElement('img')
+    loading.src='../static/pics/loading.gif'
+    loading.style.width='40px'
+    loading.style.height='40px'
+    loading.style.margin='0 auto'
+    load_div.appendChild(loading)    
+    document.getElementById('index-weather-cards').appendChild(load_div)
+}
+
+loadFunc()
