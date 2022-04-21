@@ -48,18 +48,21 @@ table {
 }
 
 header {
-    background: rgba(162, 169, 175, 0.2);
+    background: #fff;
     height: 90px;
+    position: sticky;
+    top: 0;
+    z-index:90;
 }
-
 
 .index-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 1200px; 
+    width: 100%; 
     height: 90px; 
     margin: 0 auto;
+    background: rgba(162, 169, 175, 0.2);
 }
 
 .index-title a {
@@ -69,16 +72,18 @@ header {
     color: #4c5870ff;
 }
 
+.index-title {
+    margin-left: 5%;
+}
+
 .index-date {
     font-family: 'Noto Sans TC', sans-serif;
     font-size: 20px;
     color: #a2a9afff;
+    margin-right: 5%;
 }
 
 @media(max-width:1200px){
-    .index-header {
-        width: 90%; 
-    }
 
     .index-title a {
         font-size: 25px;
