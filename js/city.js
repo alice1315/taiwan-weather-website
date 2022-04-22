@@ -9,6 +9,19 @@ var date;
 var weather;
 
 
+
+
+async function cityInit(){
+    await loadFunc2()
+    data = await initCityData();
+    getWeatherValue()
+
+    getCity();
+    getCityInfo();
+    renderPage();
+    toIndex();
+}
+
 function getWeatherValue(){
     for (let a = 0; a < Object.keys(arr2).length; a++){//歷遍每個縣市，蒐集其資料，arr2[a]是 {county:"基隆市",id:0}
         for (let d=0; d<Object.keys(data).length;d++){ //抓出氣象局縣市的鄉鎮row index
@@ -72,16 +85,6 @@ function getWeatherValue(){
 
 }
 
-async function cityInit(){
-    await loadFunc()
-    data = await initCityData();
-    getWeatherValue()
-
-    getCity();
-    getCityInfo();
-    renderPage();
-    toIndex();
-}
 
 function getCity(){
     let url = new URL(window.location.href);
@@ -134,9 +137,7 @@ function toIndex(){
 }
 
 
-
-
-async function loadFunc(){
+async function loadFunc2(){
     document.querySelector('.main').style.display = 'none' //背景消失
     let load_div = document.createElement('div')
     load_div.id='loadGif'
@@ -153,6 +154,7 @@ async function loadFunc(){
 
     await new Promise(resolve => setTimeout(resolve, 500));
 }
+
 
 
 let arr2 =[{county:"基隆市",id:0,townNo:[],wind:[],light:[],humid:[]},
