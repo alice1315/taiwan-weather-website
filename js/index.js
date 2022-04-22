@@ -10,7 +10,7 @@ async function index(){
     let records_36hr=[]
     for (let j=0; j<old_records_36hr.length; j++){
         for (let i=0; i<arr.length;i++){
-            if (old_records_36hr[j]['locationName']==arr[i]['county']){
+            if (old_records_36hr[j]['locationName']===arr[i]['county']){
                 old_records_36hr[j]['id']=arr[i]['id']
                 records_36hr.push(old_records_36hr[j])
             }
@@ -36,7 +36,7 @@ async function index(){
 
     
 
-        if (Object.keys(weather_ob).length==0){
+        if (Object.keys(weather_ob).length===0){
             if (startHr<6 || startHr>=18){
                 weather_ob['天氣描述']= whIcon['天氣描述']
                 weather_ob['圖示'] = whIcon['夜晚圖示']
@@ -50,12 +50,12 @@ async function index(){
 
         //製作日期div
         let dateDiv = document.querySelector('.index-date')
-        if(dateDiv.innerHTML==''){
+        if(dateDiv.innerHTML===''){
             dateDiv.appendChild(document.createTextNode(`${date}`))
         }
 
         for (let w=0; w< Object.keys(weather_ob['天氣描述']).length; w++){
-            if (weather_ob['天氣描述'][w] == weather){
+            if (weather_ob['天氣描述'][w] === weather){
                 iconUrl = weather_ob['圖示'][w] 
             }
         }
@@ -118,35 +118,35 @@ function toCity(e){
 //製作各button東西南北的縣市資料
 function blockClick(i){
     document.getElementById('index-weather-cards').innerHTML = ''
-    if (i == 0){ //全台
+    if (i === 0){ //全台
         for(let j = 0; j < whole_bk.length; j++){
             let locationName = whole_bk[j]['locationName'], averageT = whole_bk[j]['averageT'], weather = whole_bk[j]['weather']
             iconUrl = whole_bk[j]['icon']
             makeDiv(locationName,averageT,weather,iconUrl)
         }
     }
-    else if(i == 1){// 北部
+    else if(i === 1){// 北部
         for(let j = 0; j < north_bk.length; j++){
             let locationName = north_bk[j]['locationName'], averageT = north_bk[j]['averageT'], weather = north_bk[j]['weather']
             iconUrl = north_bk[j]['icon']
             makeDiv(locationName,averageT,weather,iconUrl)
         }
     }
-    else if(i == 2){
+    else if(i === 2){
         for(let j = 0; j < middle_bk.length; j++){
             let locationName = middle_bk[j]['locationName'], averageT = middle_bk[j]['averageT'], weather = middle_bk[j]['weather']
             iconUrl = middle_bk[j]['icon']
             makeDiv(locationName,averageT,weather,iconUrl)
         }
     }
-    else if(i == 3){
+    else if(i === 3){
         for(let j = 0; j < south_bk.length; j++){
             let locationName = south_bk[j]['locationName'], averageT = south_bk[j]['averageT'], weather = south_bk[j]['weather']
             iconUrl = south_bk[j]['icon']
             makeDiv(locationName,averageT,weather,iconUrl)
         }
     }
-    else if(i == 4){
+    else if(i === 4){
         for(let j = 0; j < east_bk.length; j++){
             let locationName = east_bk[j]['locationName'], averageT = east_bk[j]['averageT'], weather = east_bk[j]['weather']
             iconUrl = east_bk[j]['icon']
