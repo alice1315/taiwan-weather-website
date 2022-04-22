@@ -9,13 +9,10 @@ var date;
 var weather;
 
 
-
-
 async function cityInit(){
     await loadFunc2()
     data = await initCityData();
     getWeatherValue()
-
     getCity();
     getCityInfo();
     renderPage();
@@ -138,7 +135,6 @@ function toIndex(){
 
 
 async function loadFunc2(){
-    document.querySelector('.main').style.display = 'none' //背景消失
     let load_div = document.createElement('div')
     load_div.id='loadGif'
     load_div.style.display='flex'
