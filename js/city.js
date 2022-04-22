@@ -10,6 +10,7 @@ var weather;
 
 
 async function cityInit(){
+    document.querySelector('.main').style.display = 'none' //背景顯示
     await loadFunc2()
     data = await initCityData();
     getWeatherValue()
