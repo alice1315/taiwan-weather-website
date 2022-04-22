@@ -23,7 +23,7 @@ async function cityInit(){
 function getWeatherValue(){
     for (let a = 0; a < Object.keys(arr2).length; a++){//歷遍每個縣市，蒐集其資料，arr2[a]是 {county:"基隆市",id:0}
         for (let d=0; d<Object.keys(data).length;d++){ //抓出氣象局縣市的鄉鎮row index
-            if (arr2[a]['county'] == data[d]['parameter'][0]['parameterValue']){
+            if (arr2[a]['county'] === data[d]['parameter'][0]['parameterValue']){
                 arr2[a]['townNo'].push(d)
             }
         }
@@ -70,10 +70,10 @@ function getWeatherValue(){
         sum = arr2[a].light.reduce((a, b) => a + b, 0), len = arr2[a].light.length
         if (len > 0){
             if (Number.isInteger(sum/len)){
-                arr2[a].averageLight = (sum/len)+ " hr/天"
+                arr2[a].averageLight = (sum/len)+ " hr"
             }
             else{
-                arr2[a].averageLight = (sum/len).toFixed(2)+ " hr/天"
+                arr2[a].averageLight = (sum/len).toFixed(2)+ " hr"
             }
         }
         else{

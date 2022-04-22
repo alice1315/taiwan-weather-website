@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap');
+
 /* CSS HEX
 --black-olive: #3d3d3bff;
 --independence: #4c5870ff;
@@ -34,7 +34,6 @@ $gradient-radial: radial-gradient(#3d3d3bff, #4c5870ff, #ebedecff, #a2a9afff);
 
 .index-select-area {
     color:#4c5870ff;
-    font-family: 'Noto Sans TC', sans-serif;
     font-size: 30px;
     cursor: pointer; 
 }
@@ -58,7 +57,6 @@ $gradient-radial: radial-gradient(#3d3d3bff, #4c5870ff, #ebedecff, #a2a9afff);
 }
 
 .index-city {
-    font-family: 'Noto Sans TC', sans-serif;
     font-size: 26px;
     margin-right: 50px;
     margin-left: 20px;  
@@ -67,7 +65,6 @@ $gradient-radial: radial-gradient(#3d3d3bff, #4c5870ff, #ebedecff, #a2a9afff);
 }
 
 .index-temp {
-    font-family: 'Noto Sans TC', sans-serif;
     font-size: 26px;
     margin-left: auto;
     margin-right: 20px;
