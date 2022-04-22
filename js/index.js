@@ -225,11 +225,6 @@ let arr =[{county:"基隆市",id:0},
 {county:"金門縣",id:20},
 {county:"連江縣",id:21},]
 
-
-let whole_bk=[] ,north_bk=[], middle_bk=[], south_bk=[], east_bk=[], offshore_bk=[], weather_ob={}, iconUrl
-
-
-
 //製作loading效果
 function loadFunc(){
     let load_div = document.createElement('div')
@@ -245,5 +240,6 @@ function loadFunc(){
     document.getElementById('index-weather-cards').appendChild(load_div)
 }
 
-
 loadFunc()
+
+let whole_bk=[] ,north_bk=[], middle_bk=[], south_bk=[], east_bk=[], offshore_bk=[], weather_ob={}, iconUrl
